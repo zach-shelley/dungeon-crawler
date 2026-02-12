@@ -1,18 +1,22 @@
 {
     "Foyer" : {
         "description" : "The entrance to the dungeon is ominous",
-        "exits" : {"west" : "Dining hall", "north" : "Armory"}
+        "exits" : {"west" : "Dining hall", "north" : "Armory"}, 
+        "items" : [] 
     },
     "Dining hall" : {
-        "description" : "A long stone table fills the room as a cool draft passes through", 
-        "exits" : {"straight" : "Throne Room", "back" : "Foyer"}
+        "description" : "A long stone table fills the room as a cool draft passes through.", 
+        "exits" : {"straight" : "Throne Room", "back" : "Foyer"},
+        "items" : ["steak"]
     },
     "Armory" : {
         "description" : "Weapons cover the walls in a true display of medieval ironwork",
-        "exits" : {"straight" : "Throne Room", "back" : "Foyer"}
+        "exits" : {"straight" : "Throne Room", "back" : "Foyer"},
+        "items" : ["sword"]
     },
     "Throne Room" : {
         "description" : "The wealth and grandour of the kingdom is apparent in the halls and there seems to be a door behind the jeweled throne",
-        "exits" : {"straight" : "Escape", "back-west" : "Dining hall", "back-south" : "Armory"}
+        "exits" : {"straight" : "Escape", "back-west" : "Dining hall", "back-south" : "Armory"},
+        "items" : []
     }
 }

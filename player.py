@@ -13,8 +13,8 @@ class Player:
     def drop_item(self, item):
         self.items.remove(item)
 
-    def pick_up_item(self, item):
-        self.items.append(item)
+    def pick_up_items(self, items):
+        self.items.extend(items)
 
     def view_inventory(self):
         return self.items
