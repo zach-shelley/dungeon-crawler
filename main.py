@@ -4,6 +4,7 @@ Console Application Template
 
 This is a basic structure to get you started. Modify it for your project!
 """
+import keyboard
 
 def display_menu():
     """
@@ -61,7 +62,8 @@ def main():
     Main application loop.
     Displays menu, gets user input, processes choices.
     """
-    print("Welcome to the Console Application!")
+    print("Welcome to the Dungeon of Doom!")
+    print("PRESS SPACEBAR TO START!")
     display_menu()
     
     running = True
