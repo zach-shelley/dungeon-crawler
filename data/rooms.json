@@ -16,7 +16,7 @@
     },
     "Throne Room" : {
         "description" : "The wealth and grandour of the kingdom is apparent in the halls and there seems to be a door behind the jeweled throne",
-        "exits" : {"straight" : "Escape", "back-west" : "Dining hall", "back-south" : "Armory"},
-        "items" : []
+        "exits" : {"straight" : "Escape", "back-west" : "Dining hall", "back-south" : "Armory", "left" : "trap"},
+        "items" : ["crown jewel"]
     }
 }

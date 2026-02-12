@@ -17,4 +17,4 @@ class Player:
         self.items.extend(items)
 
     def view_inventory(self):
-        return self.items
+        return ", ".join(self.items)
