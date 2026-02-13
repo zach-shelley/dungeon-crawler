@@ -35,6 +35,7 @@
     "The Crown Room" : {
         "description" : "The wealth and grandour of the kingdom is apparent in the halls and there seems to be a door behind the jeweled throne",
         "exits" : {"straight" : "Escape", "back-west" : "The Feast Hall", "back-south" : "The Iron Room", "left" : "trap"},
-        "items" : ["crown jewel"]
+        "hidden_chest" : ["💎 crown jewel 💎"],
+        "items" : ["ruby"]
     }
 }

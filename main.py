@@ -34,8 +34,16 @@ def main():
         paths = " or ".join(available_exits.keys())
         user_decision = input(f"{user.name} is in {user.location}, {current_room["description"]} - Choose {user.name}'s next action \n Pick a path: {paths}, \n View Inventory: 'v' \n Investigate Room : 'i' ")
         if user_decision.lower() == "i":
+            if current_room.get("hidden_chest"):
+                print("While investigating the room, you find a chest!")
+                if 'bronze key' in user.items:
+                    print("You insert the key and the chest clicks open...")
+                    user.pick_up_items(current_room["hidden_chest"])
+                    current_room["hidden_chest"].clear()
+                else:
+                    print("It appears the chest is locked...")
             if not current_room["items"]:
-                print('\nRoom investigated, no items found...')
+                print('\nAfter investigating the room, no loose items were found...')
                 continue
             print(f"\n{user.name} investigates {user.location} and finds items: {', '.join(current_room["items"])}")
             user.pick_up_items(current_room["items"])
