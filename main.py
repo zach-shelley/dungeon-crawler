@@ -7,6 +7,7 @@ This is a basic structure to get you started. Modify it for your project!
 import json
 from player import Player
 from enemy import Enemy
+from create_character import create_character
 import os
 
 
@@ -29,20 +30,6 @@ def auto_save(player_obj, game_data):
     with open(f"data/saves/autosave.json", "w") as json_file:
         json.dump(save, json_file)
 
-#     print("3. Show information")
-#     print("help - Show this menu")
-#     print("quit - Exit application")
-        
-#     elif choice == "help":
-#         display_menu()
-        
-#     elif choice == "quit":
-#         print("Thanks for using the application. Goodbye!")
-#         return False
-        
-#     else:
-#         print(f"'{choice}' is not a valid option. Type 'help' to see available commands.")
-
 def main():
     """
     Main application loop.
@@ -58,8 +45,7 @@ def main():
         if ready_var.lower() == 'y':
             ready_to_play = True
     
-    # character_name = input("Choose a name for your hero")
-    user = Player(input("What is your hero's name? "), "Foyer")
+    user = create_character()
     print(user.name + " has entered the dungeon!")
 
     playing = True
