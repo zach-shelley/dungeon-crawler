@@ -13,12 +13,22 @@ class Player:
 
 # work through length check w/ testing
     def pick_up_items(self, items):
+        pickup_choice = input("Pickup all items ('a') or item by item ('i')")
+        individual = False
+        if pickup_choice == "i":
+            individual = True
+          
         for item in items:
             if self.items > self.max_items:
                 print("Inventory full - must drop items")
-                return 
-            else:
-                self.items.append(item)
+                break
+            if individual:
+                choice = input("y/n")
+                if choice != "y":
+                    continue
+            
+            self.items.append(item)
+            items.remove(item)
         
     def view_inventory(self):
         return ", ".join(self.items)

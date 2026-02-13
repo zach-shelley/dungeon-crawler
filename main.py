@@ -1,4 +1,5 @@
 import json
+import random
 from player import Player
 from enemy import Enemy
 from create_character import create_character
@@ -38,20 +39,25 @@ def main():
                 continue
             print(f"\n{user.name} investigates {user.location} and finds items: {', '.join(current_room["items"])}")
             user.pick_up_items(current_room["items"])
-            print(f"\nItems picked up: {', '.join(current_room["items"])}")
-            current_room["items"].clear()
+            print(f"\nNew inventory: {user.view_inventory()}")
         elif user_decision.lower() == "v":
             print(f"\n{user.name}'s inventory: {user.view_inventory()}")
 
         elif user_decision in available_exits:
-            if current_room["exits"][user_decision] == "Escape":
+            if available_exits[user_decision] == "Escape":
                 print(f"{user.name} escaped the dungeon!")
                 playing = False
-            elif current_room["exits"][user_decision] == "trap":
+            elif available_exits[user_decision] == "trap":
                 print(f"A hidden lever activates a trap and an arrow impales {user.name}. \n Game over")
                 playing = False
+            elif available_exits[user_decision].get("riddle"):
+                riddle = random.choice(available_exits["user_decision"]["riddle"])
+                user_answer = input(f"{riddle["question"]}")
+                if user_answer.lower() == riddle["answer"]:
+                    print("The lock clicks and the door creaks open as you enter a secret room")
+                    user.location = available_exits[user_decision]
             else:
-                user.location = current_room['exits'][user_decision]
+                user.location = available_exits[user_decision]
         else:
             print(f"{user.name} cannot go that direction.")
 
