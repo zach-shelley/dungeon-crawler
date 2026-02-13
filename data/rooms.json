@@ -7,7 +7,12 @@
     "The Feast Hall" : {
         "description" : "Long tables of scarred timber stretch toward a massive hearth, where the faint scent of stale ale and roasted meat lingers beneath tattered banners.", 
         "exits" : {"straight" : "The Crown Room", "back" : "The Mouth of the Hall"},
-        "items" : ["silver chalice", "rations", "bronze key"]
+        "items" : ["silver chalice", "rations", "bronze key"], 
+        "enemy" : {
+            "description" : "A bony skeleton leaning against the wall comes alive and attacks",
+            "name" : "skeleton", 
+            "items" : ["bone"]
+        }
     },
     "The Iron Room" : {
         "description" : "Racks of notched steel and the sharp tang of oil fill this cold stone vault, where the weight of war hangs heavy on every wall.",

@@ -4,8 +4,9 @@ from player import Player
 from enemy import Enemy
 from create_character import create_character
 from extras import auto_save, display_menu
+from battle_system import combat
 
-# combat, length check for max items, and item by item pickup are TODOs
+# combat
 
 def main():
     """
@@ -32,6 +33,13 @@ def main():
         current_room = room_data[user.location]
         available_exits = current_room["exits"]
         paths = " or ".join(available_exits.keys())
+        if current_room.get("enemy"):
+            print(current_room["enemy"]["description"])
+            enemy = Enemy(current_room["enemy"]["name"], current_room["enemy"]["items"])
+            result = combat(user, enemy)
+            if result == "dead":
+                playing = False
+                continue
         user_decision = input(f"{user.name} is in {user.location}, {current_room["description"]} - Choose {user.name}'s next action \n Pick a path: {paths}, \n View Inventory: 'v' \n Investigate Room : 'i' ")
         if user_decision.lower() == "i":
             if current_room.get("hidden_chest"):
@@ -45,7 +53,7 @@ def main():
             if not current_room["items"]:
                 print('\nAfter investigating the room, no loose items were found...')
                 continue
-            print(f"\n{user.name} investigates {user.location} and finds items: {', '.join(current_room["items"])}")
+            print(f"\n{user.name} investigates {user.location} and finds items: {', '.join(current_room['items'])}")
             user.pick_up_items(current_room["items"])
             print(f"\nNew inventory: {user.view_inventory()}")
         elif user_decision.lower() == "v":
@@ -58,9 +66,9 @@ def main():
             elif available_exits[user_decision] == "trap":
                 print(f"A hidden lever activates a trap and an arrow impales {user.name}. \n Game over")
                 playing = False
-            elif available_exits[user_decision].get("riddle"):
-                riddle = random.choice(available_exits["user_decision"]["riddle"])
-                user_answer = input(f"{riddle["question"]}")
+            elif room_data[available_exits[user_decision]].get("riddle"):
+                riddle = random.choice(room_data[available_exits[user_decision]]["riddle"])
+                user_answer = input(f"{riddle['question']}")
                 if user_answer.lower() == riddle["answer"]:
                     print("The lock clicks and the door creaks open as you enter a secret room")
                     user.location = available_exits[user_decision]

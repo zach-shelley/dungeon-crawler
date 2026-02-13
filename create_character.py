@@ -15,7 +15,7 @@ def create_character():
         character_class = input("Choose a class for your hero: Dwarf, Ranger, Elf ")
 
         if character_class.lower() in classes:
-            user = classes[character_class.lower()](character_name, "Foyer")
+            user = classes[character_class.lower()](character_name, "The Mouth of the Hall")
             character_created = True
         else:
             print("Invalid input. Please enter one of the available class options.")
