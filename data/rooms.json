@@ -7,16 +7,16 @@
     "Dining hall" : {
         "description" : "A long stone table fills the room as a cool draft passes through.", 
         "exits" : {"straight" : "Throne Room", "back" : "Foyer"},
-        "items" : ["steak"]
+        "items" : ["Chalice", "rations", "silver necklace"]
     },
     "Armory" : {
         "description" : "Weapons cover the walls in a true display of medieval ironwork",
         "exits" : {"straight" : "Throne Room", "back" : "Foyer"},
-        "items" : ["sword"]
+        "items" : ["mace", "helmet", "leather straps"]
     },
     "Throne Room" : {
         "description" : "The wealth and grandour of the kingdom is apparent in the halls and there seems to be a door behind the jeweled throne",
         "exits" : {"straight" : "Escape", "back-west" : "Dining hall", "back-south" : "Armory", "left" : "trap"},
-        "items" : ["crown jewel"]
+        "items" : ["crown jewel", "key"]
     }
 }

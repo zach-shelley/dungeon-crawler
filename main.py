@@ -1,34 +1,10 @@
-"""
-Week 2 Final Project - Starter Code
-Console Application Template
-
-This is a basic structure to get you started. Modify it for your project!
-"""
 import json
 from player import Player
 from enemy import Enemy
 from create_character import create_character
-import os
+from extras import auto_save, display_menu
 
-
-
-def display_menu():
-    print("=" * 60)
-    print("Welcome to the Dungeon of Doom!".center(60))
-    print("=" * 60)
-
-def auto_save(player_obj, game_data):
-    save = {
-        "player" : {
-            "name" : player_obj.name,
-            "location" : player_obj.location,
-            "items" : player_obj.items
-        },
-        "rooms" : game_data
-        }
-    os.makedirs("data/saves", exist_ok=True)
-    with open(f"data/saves/autosave.json", "w") as json_file:
-        json.dump(save, json_file)
+# combat, length check for max items, and item by item pickup are TODOs
 
 def main():
     """
@@ -62,7 +38,7 @@ def main():
                 continue
             print(f"\n{user.name} investigates {user.location} and finds items: {', '.join(current_room["items"])}")
             user.pick_up_items(current_room["items"])
-            print(f"\nItems picked up: {', '.join(current_room["items"])}'")
+            print(f"\nItems picked up: {', '.join(current_room["items"])}")
             current_room["items"].clear()
         elif user_decision.lower() == "v":
             print(f"\n{user.name}'s inventory: {user.view_inventory()}")
