@@ -61,7 +61,6 @@ class Elf(Player):
         self.max_items = 5
         self.add_starting_items(["Bow"])
         self.hp = 50
-        self.mana  = 50
         self.damage = 4
         self.to_hit_bonus = 3
         self.ac = 13
@@ -76,7 +75,6 @@ class Dwarf(Player):
         self.max_items = 10
         self.add_starting_items(["Great axe"])
         self.hp = 100
-        self.mana = 30
         self.damage = 8
         self.to_hit_bonus = 0
         self.ac = 8
@@ -91,7 +89,6 @@ class Ranger(Player):
         self.max_items = 8
         self.add_starting_items(["Longsword"])
         self.hp = 75
-        self.mana = 40
         self.damage = 6
         self.to_hit_bonus = 1
         self.bide_bonus = 2

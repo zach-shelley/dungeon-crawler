@@ -28,24 +28,28 @@ def battle_round(user, target):
 
 def player_turn(user, target):
 
-    battle_choice = input('user.name will...\n\nFight - Attack The Creature!\n\nBide - Watch and wait, look for a good time to strike! ')
+    battle_choice = input(f'{user.name} will...\n\nFight - Attack The Creature!\n\nBide - Watch and wait, look for a good time to strike! ')
 
     if battle_choice.lower() == 'fight':
     
         is_hit, is_crit = user.check_hit(user.bide_counter, target)
         user.bide_counter = 0
         if is_crit:
-            print(f'{user.name} hit the {target.name}!\n \n CRITICAL HIT!')
-            target.hp -= user.critical_attack()
+            critical_hit = user.critical_attack()
+            print(f'CRITICAL HIT!\n\n{user.name} hits the {target.name}! {critical_hit} damage')
+            target.hp -= critical_hit
             if target.hp <= 0:
                 print(f"The {target.name} dies")
                 return
+            print(f"{target.name} : {target.hp} HP\n{user.name} : {user.hp} HP")
         elif is_hit:
-            print(f'{user.name} hit the {target.name}!')
-            target.hp -= user.attack()
+            attack = user.attack()
+            print(f'{user.name} hit the {target.name}! {attack} damage')
+            target.hp -= attack
             if target.hp <= 0:
                 print(f"The {target.name} dies")
                 return
+            print(f"{target.name} : {target.hp} HP\n{user.name} : {user.hp} HP")
         elif not is_hit:
             print(f'{user.name} missed!')
     

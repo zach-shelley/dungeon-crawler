@@ -10,7 +10,7 @@
         "items" : ["silver chalice", "rations", "bronze key"], 
         "enemy" : {
             "description" : "A bony skeleton leaning against the wall comes alive and attacks",
-            "name" : "skeleton", 
+            "type" : "skeleton", 
             "items" : ["bone"]
         }
     },
