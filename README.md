@@ -19,6 +19,5 @@ Skills displayed:
 
 ## Resources
 
-- [Organizing Your Code](https://learn.galvanize.com) - How to structure your application
 - [Feeling Adventurous?](https://learn.galvanize.com) - Ideas for extending your project
 
