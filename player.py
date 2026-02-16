@@ -53,11 +53,12 @@ class Player:
         return self.damage  
 
     def critical_attack(self):
-        pass
+        raise NotImplementedError("Critical attack must be defined at the subclass level for class based multipliers.")
     
 class Elf(Player):
     def __init__(self, name, location):
         super().__init__(name, location)
+        self.type = "elf"
         self.max_items = 5
         self.add_starting_items(["Bow"])
         self.hp = 50
@@ -72,6 +73,7 @@ class Elf(Player):
 class Dwarf(Player):
     def __init__(self, name, location):
         super().__init__(name, location)
+        self.type = "dwarf"
         self.max_items = 10
         self.add_starting_items(["Great axe"])
         self.hp = 100
@@ -86,6 +88,7 @@ class Dwarf(Player):
 class Ranger(Player):
     def __init__(self, name, location):
         super().__init__(name, location)
+        self.type = "ranger"
         self.max_items = 8
         self.add_starting_items(["Longsword"])
         self.hp = 75

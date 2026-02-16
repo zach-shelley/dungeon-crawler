@@ -4,10 +4,8 @@ from player import Player
 from enemy import Enemy
 from create_character import create_character
 from create_enemy import create_enemy
-from extras import auto_save, display_menu
+from extras import auto_save, load_save, display_menu
 from battle_system import combat
-
-# combat
 
 def main():
     """
@@ -25,9 +23,12 @@ def main():
             ready_var = input("Are you ready to begin your quest? y/n ")
             if ready_var.lower() == 'y':
                 ready_to_play = True
-        
-        user = create_character()
-        print(user.name + " has entered the dungeon!")
+        load_game = input("Load save? Y/N")
+        if load_game.lower() == "y":
+            user, room_data = load_save("data/saves/autosave.json")
+        else:
+            user = create_character()
+            print(user.name + " has entered the dungeon!")
 
         playing = True
         while playing:

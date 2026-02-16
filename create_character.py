@@ -1,6 +1,6 @@
 from player import Ranger, Elf, Dwarf
 
-def create_character():
+def create_character(save_data = None):
 
     classes = {
         "dwarf" : Dwarf,
@@ -8,6 +8,13 @@ def create_character():
         "elf" : Elf
     }
 
+    if save_data:
+        player_data = save_data["player"]
+        player = classes[player_data["type"]](player_data["name"], player_data["location"])
+        player._items = player_data["items"]
+        player.hp = player_data["hp"]
+        return player
+    
     character_name = input("Choose a name for your hero ")
     
     character_created = False
