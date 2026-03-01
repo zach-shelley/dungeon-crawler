@@ -1,5 +1,3 @@
-from enemy import Enemy
-
 def combat(user, target):
     print("""
 ___________.___  ________  ___ ______________._.

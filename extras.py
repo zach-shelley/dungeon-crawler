@@ -29,3 +29,32 @@ def load_save(json_file):
         saved_room_data = save["rooms"]
 
         return player, saved_room_data
+    
+def initiate_game(room_data):
+    display_menu()
+    ready_to_play = False
+    while not ready_to_play:
+        ready_var = input("Are you ready to begin your quest? y/n ")
+        if ready_var.lower() == 'y':
+            ready_to_play = True
+    load_game = input("Load save? Y/N")
+    if load_game.lower() == "y":
+        if os.path.exists("data/saves/autosave.json"):
+            user, room_data = load_save("data/saves/autosave.json")
+            print(f"Welcome back {user.name}!")
+    else:
+        user = create_character()
+        print(user.name + " has entered the dungeon!")
+
+    return user, room_data
+
+def play_again():
+
+    while True:
+        user_choice = input("Would you like to play again? y/n ")
+        if user_choice.lower() == 'y': 
+            return True
+        elif user_choice.lower() == 'n':
+            return False
+        else:
+            print("Invalid input: Please answer Y/N")
