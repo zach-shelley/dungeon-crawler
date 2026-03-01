@@ -1,4 +1,4 @@
-from enemy import Skeleton, Zombie, Vampire
+from player import Skeleton, Zombie, Vampire
 
 enemy_dict = {
     "vampire" : Vampire, 

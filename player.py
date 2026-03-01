@@ -1,14 +1,17 @@
 import random
 
-class Player:
-    def __init__(self, name, location):
+class Character:
+    def __init__(self, name, location = "Unknown"):
         self._items = []
+        self.max_items = -1
         self.name = name
         self.location = location
         self.to_hit_bonus = 0
         self.bide_bonus = 1
-        self.ac = 0
-        self.bide_counter = 0
+        self.ac = -1
+        self.bide_counter = -1
+        self.damage = -1
+        self.portrait = ""
 
     @property
     def items(self):
@@ -19,26 +22,6 @@ class Player:
         
     def drop_item(self, item):
         self.items.remove(item)
-
-    def pick_up_items(self, items):
-        pickup_choice = input("Pickup all items ('a') or item by item ('i')")
-        individual = False
-        if pickup_choice == "i":
-            individual = True
-        items_to_remove = []
-        for item in items:
-            if len(self.items) >= self.max_items:
-                print("Inventory full - must drop items")
-                break
-            if individual:
-                choice = input("y/n")
-                if choice != "y":
-                    continue
-            
-            self.items.append(item)
-            items_to_remove.append(item)
-        for i in items_to_remove:
-            items.remove(i)
             
     def view_inventory(self):
         return ", ".join(self.items)
@@ -55,7 +38,7 @@ class Player:
     def critical_attack(self):
         raise NotImplementedError("Critical attack must be defined at the subclass level for class based multipliers.")
     
-class Elf(Player):
+class Elf(Character):
     def __init__(self, name, location):
         super().__init__(name, location)
         self.type = "elf"
@@ -70,7 +53,7 @@ class Elf(Player):
         return self.damage * 3
     
 
-class Dwarf(Player):
+class Dwarf(Character):
     def __init__(self, name, location):
         super().__init__(name, location)
         self.type = "dwarf"
@@ -85,7 +68,7 @@ class Dwarf(Player):
         return self.damage * 2
 
 
-class Ranger(Player):
+class Ranger(Character):
     def __init__(self, name, location):
         super().__init__(name, location)
         self.type = "ranger"
@@ -100,3 +83,88 @@ class Ranger(Player):
     
     def critical_attack(self):
         return self.damage * 1.75
+    
+class Skeleton(Character):
+    def __init__(self, name):
+        super().__init__(name)
+        self.hp = 5
+        self.ac = 9
+        self.damage = 15
+        self.to_hit_bonus = 1
+        self.portrait = """ 
+               ／  ⌒ ＼
+　　　　　　　　 l_0..0_l
+　　　　　　　　　 l冊l
+　　　　　　　　-=-v=-
+　　　　　　　　}{ 彡ミﾉ{
+　　　　　　　　}{　非　}{
+　　　　　　　 匁 OTO) 匁
+　　　　　　　　　}{　}{
+　　　　　　　　　}{　}{
+　　　　　　　　  及  及"""
+        
+    def critical_attack(self):
+        return self.damage * 1.5
+    
+class Zombie(Character):
+    def __init__(self, name):
+        super().__init__(name)
+        self.hp = 5
+        self.ac = 8
+        self.damage = 9
+        self.to_hit_bonus = 1
+        self.portrait = """
+      (()))
+                               /|x x|
+                              /\( - )
+                      ___.-._/\/
+                     /=`_'-'-'/  !!
+                     |-{-_-_-}     !
+                     (-{-_-_-}    !
+                      \{_-_-_}   !
+                       }-_-_-}
+                       {-_|-_}
+                       {-_|_-}
+                       {_-|-_}
+                       {_-|-_}  ZOT
+                   ____%%@ @%%_______
+"""
+
+    def critical_attack(self):
+        return self.damage * 1.5
+
+class Vampire(Character):
+    def __init__(self, name):
+        super().__init__(name)
+        self.hp = 20
+        self.ac = 14
+        self.damage = 15
+        self.to_hit_bonus = 2
+        self.portrait = """
+                /######\
+               /##########\
+              /   \###/    \
+             /     \#/      \
+          /\|               |/\
+          | | \ ==\    /== / | |
+           \|  \<|>\  /<|>/  |/     /|
+    \__     |    -   \  -    |     /#|
+     \#\     |        |      |   /###|
+      \##\   |       \|     |  /#####|
+       \###\  |   _______  | /######|
+        \####\ | / \/ \/ \|/#######|
+        |######\|        |#########|
+        |########\______/##########|
+        |#########\    /##########/
+        |##########\  |#########/\
+        /###########\/########/###\
+    /################\######/########\
+   /##################\###/###########\
+  /###################\#/##############\
+ /####################/#################\
+/###################/####################\
+"""
+
+
+    def critical_attack(self):
+        return self.damage * 2

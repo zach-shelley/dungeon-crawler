@@ -1,10 +1,8 @@
 import json
 import random
-from player import Player
-from enemy import Enemy
-from create_character import create_character
+from game_helpers import handle_items_pickup
 from create_enemy import create_enemy
-from extras import auto_save, load_save, display_menu
+from extras import auto_save, initiate_game, play_again
 from battle_system import combat
 
 def main():
@@ -17,18 +15,7 @@ def main():
         with open("data/rooms.json", "r") as f: 
             room_data = json.load(f)
 
-        display_menu()
-        ready_to_play = False
-        while not ready_to_play:
-            ready_var = input("Are you ready to begin your quest? y/n ")
-            if ready_var.lower() == 'y':
-                ready_to_play = True
-        load_game = input("Load save? Y/N")
-        if load_game.lower() == "y":
-            user, room_data = load_save("data/saves/autosave.json")
-        else:
-            user = create_character()
-            print(user.name + " has entered the dungeon!")
+        user, room_data = initiate_game(room_data)
 
         playing = True
         while playing:
@@ -51,19 +38,21 @@ def main():
                     print("While investigating the room, you find a chest!")
                     if 'bronze key' in user.items:
                         print("You insert the key and the chest clicks open...")
-                        user.pick_up_items(current_room["hidden_chest"])
-                        current_room["hidden_chest"].clear()
+                        pickup_choice = input("Pickup all ('a') or individually ('i'): ")
+                        individual = pickup_choice == "i"
+                        handle_items_pickup(user, current_room["hidden_chest"], individual)
                     else:
                         print("It appears the chest is locked...")
                 if not current_room["items"]:
                     print('\nAfter investigating the room, no loose items were found...')
                     continue
                 print(f"\n{user.name} investigates {user.location} and finds items: {', '.join(current_room['items'])}")
-                user.pick_up_items(current_room["items"])
+                pickup_choice = input("Pickup all items ('a') or item by item ('i')")
+                individual = pickup_choice == "i"
+                handle_items_pickup(user, current_room["items"], individual)
                 print(f"\nNew inventory: {user.view_inventory()}")
             elif user_decision.lower() == "v":
                 print(f"\n{user.name}'s inventory: {user.view_inventory()}")
-
             elif user_decision in available_exits:
                 if available_exits[user_decision] == "Escape":
                     print(f"{user.name} escaped the dungeon!")
@@ -84,11 +73,9 @@ def main():
 
             auto_save(user, room_data)
 
-        play_again = input("Would you like to play again? y/n ")
-        if play_again.lower() == 'y': 
+        if play_again():
             continue
-        elif play_again.lower() == 'n':
-            break
+        break
 
 if __name__ == "__main__":
     main()
